@@ -25,9 +25,9 @@ $(document).ready(function(){
 
     $(".button").on("click", function() {
         if ($("#userGuess").val() === randomNum) {
-              $("#feedback").empty().append("That is correct");
+              $("#feedback").html("That is correct");
          } else {
-              $("#feedback").empty().append("That is wrong");
+              $("#feedback").html("That is wrong");
         }
 
     })
