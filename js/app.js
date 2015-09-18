@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 
     var randomNum = Math.floor((100*Math.random())+1);
+    var count = 0;
 
     $(".new").on("click", function() {
         randomNum = Math.floor((100*Math.random())+1);;
@@ -24,11 +25,21 @@ $(document).ready(function(){
 
 
     $(".button").on("click", function() {
-        if ($("#userGuess").val() === randomNum) {
+        if (parseInt($("#userGuess").val()) === randomNum) {
               $("#feedback").html("That is correct");
-         } else {
-              $("#feedback").html("That is wrong");
+         } else if (parseInt($("#userGuess").val()) < randomNum) {
+              $("#feedback").html("Guess higher!");
+              count++;
+              $("#count").html(count);
+              $("#guestList").append("<li>" + parseInt($("#userGuess").val()) + "</li>");
+        } else if (parseInt($("#userGuess").val()) > randomNum) {
+              $("#feedback").html("Guess lower!");
+              count++;
+              $("#count").html(count);
+              $("#guestList").append("<li>" + parseInt($("#userGuess").val()) + "</li>");
         }
+
+        return false;
 
     })
 
