@@ -25,18 +25,23 @@ $(document).ready(function(){
 
 
     $(".button").on("click", function() {
-        if (parseInt($("#userGuess").val()) === randomNum) {
+
+        var userGuessNum = $("#userGuess").val();
+
+        if (parseInt(userGuessNum) === randomNum) {
               $("#feedback").html("That is correct");
-         } else if (parseInt($("#userGuess").val()) < randomNum) {
+         } else if (parseInt(userGuessNum) < randomNum && randomNum > 30) {
               $("#feedback").html("Guess higher!");
               count++;
               $("#count").html(count);
-              $("#guestList").append("<li>" + parseInt($("#userGuess").val()) + "</li>");
-        } else if (parseInt($("#userGuess").val()) > randomNum) {
+              $("#userGuess").val(' ');
+              $("#guessList").append("<li>" + userGuessNum + "</li>");
+        } else if (parseInt(userGuessNum) > randomNum) {
               $("#feedback").html("Guess lower!");
               count++;
               $("#count").html(count);
-              $("#guestList").append("<li>" + parseInt($("#userGuess").val()) + "</li>");
+              $("#userGuess").val(' ');
+              $("#guessList").append("<li>" + userGuessNum + "</li>");
         }
 
         return false;
