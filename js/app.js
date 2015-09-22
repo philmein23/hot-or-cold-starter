@@ -15,6 +15,7 @@ $(document).ready(function(){
 
     var randomNum = Math.floor((100*Math.random())+1);
     var count = 0;
+    var prevGuess = [];
 
     $(".new").on("click", function() {
         randomNum = Math.floor((100*Math.random())+1);;
@@ -26,15 +27,18 @@ $(document).ready(function(){
 
     $(".button").on("click", function() {
 
+
         var userGuessNum = $("#userGuess").val();
-        var prevGuess = [];
-        var i = 1;
+
 
 
         if (parseInt(userGuessNum) === randomNum) {
+
             $("#feedback").html("That is correct");
+
           } else if (prevGuess.length === 0 && userGuessNum !== randomNum) {
-            prevGuess[0] = parseInt(userGuessNum);
+
+            prevGuess.push(parseInt(userGuessNum));
             count++;
             $("#count").html(count);
             $("#userGuess").val(' ');
@@ -43,7 +47,7 @@ $(document).ready(function(){
 
 
 
-        for (i = 1; i <= prevGuess.length; i++) {
+        for (var i = 1; i <= prevGuess.length; i++) {
 
            if (parseInt(userGuessNum) < parseInt(prevGuess[i - 1]) && parseInt(userGuessNum) < randomNum) {
                   $("#feedback").html("Less than your previous guess");
@@ -81,10 +85,8 @@ $(document).ready(function(){
                   prevGuess += prevGuess[i];
 
 
-              }
+            }
         }
-
-
 
         return false;
 
