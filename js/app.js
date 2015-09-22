@@ -27,16 +27,76 @@ $(document).ready(function(){
     $(".button").on("click", function() {
 
         var userGuessNum = $("#userGuess").val();
+        var prevGuess = [];
+        var i = 1;
+
 
         if (parseInt(userGuessNum) === randomNum) {
+            $("#feedback").html("That is correct");
+          } else if (prevGuess.length === 0 && userGuessNum !== randomNum) {
+            prevGuess[0] = parseInt(userGuessNum);
+            count++;
+            $("#count").html(count);
+            $("#userGuess").val(' ');
+            $("#guessList").append("<li>" + userGuessNum + "</li>");
+        }
+
+
+
+        for (i = 1; i <= prevGuess.length; i++) {
+
+           if (parseInt(userGuessNum) < parseInt(prevGuess[i - 1]) && parseInt(userGuessNum) < randomNum) {
+                  $("#feedback").html("Less than your previous guess");
+                  count++;
+                  $("#count").html(count);
+                  $("#userGuess").val(' ');
+                  $("#guessList").append("<li>" + userGuessNum + "</li>");
+                  prevGuess += prevGuess[i];
+
+
+            } else if (parseInt(userGuessNum) < parseInt(prevGuess[i - 1])&& parseInt(userGuessNum) > randomNum) {
+                  $("#feedback").html("Less than your previous guess");
+                  count++;
+                  $("#count").html(count);
+                  $("#userGuess").val(' ');
+                  $("#guessList").append("<li>" + userGuessNum + "</li>");
+                  prevGuess += prevGuess[i];
+
+
+            } else if (parseInt(userGuessNum) > parseInt(prevGuess[i - 1]) && parseInt(userGuessNum) < randomNum) {
+                  $("#feedback").html("Higher than your previous guess");
+                  count++;
+                  $("#count").html(count);
+                  $("#userGuess").val(' ');
+                  $("#guessList").append("<li>" + userGuessNum + "</li>");
+                  prevGuess += prevGuess[i];
+
+
+            } else if (parseInt(userGuessNum) > parseInt(prevGuess[i - 1]) && parseInt(userGuessNum) > randomNum) {
+                  $("#feedback").html("Higher than your previous guess");
+                  count++;
+                  $("#count").html(count);
+                  $("#userGuess").val(' ');
+                  $("#guessList").append("<li>" + userGuessNum + "</li>");
+                  prevGuess += prevGuess[i];
+
+
+              }
+        }
+
+
+
+        return false;
+
+        /*if (parseInt(userGuessNum) === randomNum) {
               $("#feedback").html("That is correct");
-         } else if (parseInt(userGuessNum) < randomNum && randomNum > 30) {
+            } else if (parseInt(userGuessNum) < randomNum) {
               $("#feedback").html("Guess higher!");
               count++;
               $("#count").html(count);
               $("#userGuess").val(' ');
               $("#guessList").append("<li>" + userGuessNum + "</li>");
-        } else if (parseInt(userGuessNum) > randomNum) {
+            } else if (parseInt(userGuessNum) > randomNum) {
               $("#feedback").html("Guess lower!");
               count++;
               $("#count").html(count);
@@ -44,7 +104,7 @@ $(document).ready(function(){
               $("#guessList").append("<li>" + userGuessNum + "</li>");
         }
 
-        return false;
+        return false;*/
 
     })
 
