@@ -24,7 +24,9 @@ $(document).ready(function(){
         $(".guessBox").empty();
         $("#count").html(0);
         $("#feedback").html("Make your Guess!");
+
     })
+
 
 
     $(".button").on("click", function() {
@@ -49,19 +51,27 @@ $(document).ready(function(){
             $("#userGuess").val(' ');
 
         }
-        else if (prevGuess[1] > prevGuess[0] && prevGuess[1] < randomNum) {
+        else if (Math.abs(randomNum - prevGuess[1]) > Math.abs(randomNum - prevGuess[0])) {
+            $("#feedback").html("Guess again " + prevGuess[0] + " is closer to the answer");
+            $("#guessList").append("<li>" + userGuessNum + "</li>");
+            count++;
+            $("#count").html(count);
+            $("#userGuess").val(' ');
 
+        }
+        else if (Math.abs(randomNum - prevGuess[1]) < Math.abs(randomNum - prevGuess[0])) {
+            $("#feedback").html("Guess again " + prevGuess[1] + " is closer to the answer");
+            $("#guessList").append("<li>" + userGuessNum + "</li>");
+            count++;
+            $("#count").html(count);
+            $("#userGuess").val(' ');
+        }
 
 
 
          if (prevGuess.length > 1) {
             prevGuess.shift();
         }
-
-
-
-
-
 
 
         return false;
